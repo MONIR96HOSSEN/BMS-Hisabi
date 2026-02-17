@@ -1,0 +1,7 @@
+{
+  "name": "Hisabe copy app final backup with",
+  "description": "A comprehensive, AI-powered offline-first business management application designed for SMEs, featuring POS, inventory tracking, CRM, and financial reporting.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Business Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                margin: 0;
+                padding: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+            
+            /* If the receipt is NOT showing, print the main content */
+            #root {
+                display: block !important;
+            }
+
+            /* Standard page printing (Reports, Stock, etc) */
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            /* Thermal Receipt Logic: Only apply special sizing if the wrapper exists and is visible */
+            #printable-receipt-wrapper {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 58mm !important;
+                background: white !important;
+                z-index: 9999;
+            }
+
+            /* When printing a receipt, hide the rest of the app for clarity */
+            body:has(#printable-receipt-wrapper) main,
+            body:has(#printable-receipt-wrapper) header,
+            body:has(#printable-receipt-wrapper) .sidebar-container {
+                display: none !important;
+            }
+
+            .thermal-receipt {
+                width: 58mm;
+                max-width: 58mm;
+                margin: 0;
+                padding: 2mm;
+                font-size: 10px;
+                border: none !important;
+                box-shadow: none !important;
+                line-height: 1.2;
+                color: black !important;
+            }
+            
+            @page {
+                size: auto;
+                margin: 10mm;
+            }
+            
+            /* Custom page for thermal receipts */
+            body:has(#printable-receipt-wrapper) @page {
+                size: 58mm auto;
+                margin: 0mm;
+            }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "recharts": "https://esm.sh/recharts@^3.7.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.564.0",
+    "@capacitor/core": "https://esm.sh/@capacitor/core@^6.0.0",
+    "@capacitor/filesystem": "https://esm.sh/@capacitor/filesystem@^6.0.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
